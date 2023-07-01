@@ -1,9 +1,12 @@
 /**
  * @see https://umijs.org/zh-CN/plugins/plugin-access
  * */
-export default function access(initialState: { currentUser?: API.CurrentUser } | undefined) {
-  const { currentUser } = initialState ?? {};
+import {login} from "@/services/ant-design-pro/api";
+
+export default function access(initialState: InitalState | undefined) {
+  const { loginUser } = initialState ?? {};
   return {
-    canAdmin: currentUser && currentUser.access === 'admin',
+    canUser: loginUser,
+    canAdmin: loginUser?.userRole === 'admin',
   };
 }
